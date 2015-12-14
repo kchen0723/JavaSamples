@@ -1,0 +1,41 @@
+﻿
+String tans=null;
+		try {
+			tans = new String(trendnamet.getText().getBytes(), "gbk");
+		} catch (UnsupportedEncodingException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		} 
+
+ResultSetMetaData rsmd=null;
+		try {
+			rsmd = rt.getMetaData();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+			try {
+		 		while(rt.next()){ 
+					for(int i=1;i<33;i++){
+						try {
+							String str=new String(rt.getBytes(rsmd.getColumnName(i+1)),"gbk");
+							temp[i-1]=str;
+						} catch (UnsupportedEncodingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						//temp[i-1]= rt.getString(rsmd.getColumnName(i+1));
+					}
+		 			model.addRow(temp);
+		  			}
+		  		} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		  		}  
+		  		try {
+		  			rt.close();
+		  		} catch (SQLException e) {
+				// TODO Auto-generated catch block
+		  			e.printStackTrace();
+		  	}
+	}
